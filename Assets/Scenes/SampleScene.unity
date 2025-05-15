@@ -1278,10 +1278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a982dacdf98eb4188d931c2284096d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2005039521336448677, guid: 5bd2cf85041c8c3468b24f7a13942110, type: 3}
   enemiesPerWave: 5
   timeBetweenWaves: 5
-  advancedEnemyPrefab: {fileID: 2005039521336448677, guid: 1f5df0ec9b5134241a71c9afc949c031, type: 3}
   advancedEveryXWaves: 5
   speedIncrementPerWave: 0.2
 --- !u!4 &880656228
@@ -1311,7 +1309,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c02dd715d569c44589f53103f087363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2005039521336448677, guid: 5bd2cf85041c8c3468b24f7a13942110, type: 3}
+  standardPrefabs:
+  - {fileID: 1290626581852382195, guid: 0f5452c8bf86b4243abeb203d7787e22, type: 3}
+  - {fileID: 6739433511464272459, guid: c522ea98835cf1440908a657a3adaae1, type: 3}
+  - {fileID: 4104298828209902893, guid: 99118eaec19bae5488c91c20724186b7, type: 3}
+  advancedPrefabs:
+  - {fileID: 7561194717367255312, guid: 0028ee9c57278484292dd4eafd7c3d49, type: 3}
   spawnPoint: {fileID: 131624100}
   rows: 2
   columns: 5
@@ -1712,7 +1715,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c02dd715d569c44589f53103f087363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2005039521336448677, guid: 5bd2cf85041c8c3468b24f7a13942110, type: 3}
+  standardPrefabs:
+  - {fileID: 1290626581852382195, guid: 0f5452c8bf86b4243abeb203d7787e22, type: 3}
+  - {fileID: 6739433511464272459, guid: c522ea98835cf1440908a657a3adaae1, type: 3}
+  - {fileID: 4104298828209902893, guid: 99118eaec19bae5488c91c20724186b7, type: 3}
+  advancedPrefabs:
+  - {fileID: 7561194717367255312, guid: 0028ee9c57278484292dd4eafd7c3d49, type: 3}
   spawnPoint: {fileID: 131624100}
   rows: 2
   columns: 5

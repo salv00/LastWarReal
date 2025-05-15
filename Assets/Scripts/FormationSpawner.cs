@@ -1,20 +1,26 @@
-// FormationSpawner.cs
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class FormationSpawner : MonoBehaviour
 {
     [Header("Formation Settings")]
-    public GameObject enemyPrefab;  // sera réécrit à chaque vague
-    public Transform spawnPoint;    // MainSpawnPoint devant le joueur
+    public GameObject[] standardPrefabs;  // zombies
+    public GameObject[] advancedPrefabs;  // golems
+    public Transform spawnPoint;
     public int rows = 2;
     public int columns = 5;
     public float spacing = 2f;
 
-    public void SpawnFormation()
+    /// <summary>
+    /// Spawn une formation soit de prefabs standards, soit de prefabs avancÃ©s.
+    /// </summary>
+    public void SpawnFormation(bool useAdvanced = false)
     {
-        if (enemyPrefab == null)
+        // Choix du tableau
+        var source = useAdvanced ? advancedPrefabs : standardPrefabs;
+        if (source == null || source.Length == 0)
         {
-            Debug.LogError("FormationSpawner: enemyPrefab not assigned");
+            Debug.LogError("FormationSpawner: Aucun prefab dans " +
+                (useAdvanced ? "advancedPrefabs" : "standardPrefabs") + " !");
             return;
         }
         if (spawnPoint == null)
@@ -29,7 +35,6 @@ public class FormationSpawner : MonoBehaviour
         {
             for (int c = 0; c < columns; c++)
             {
-                // Calcul de la position en formation
                 Vector3 offset = new Vector3(
                     c * spacing - (columns - 1) * spacing / 2f,
                     0,
@@ -37,21 +42,20 @@ public class FormationSpawner : MonoBehaviour
                 );
                 Vector3 spawnPos = basePos + offset;
 
-                // Instanciation
-                var enemyGO = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-                enemyGO.tag = "Enemy";  // important pour FindGameObjectsWithTag
+                // Instancie un prefab alÃ©atoire du tableau sÃ©lectionnÃ©
+                var prefab = source[Random.Range(0, source.Length)];
+                var enemyGO = Instantiate(prefab, spawnPos, Quaternion.identity);
+                enemyGO.tag = "Enemy";
 
                 // Orientation vers le joueur
                 var playerT = GameObject.FindWithTag("Player")?.transform;
                 if (playerT != null)
+                {
                     enemyGO.transform.LookAt(playerT);
-
-                var eScript = enemyGO.GetComponent<Enemy>();
-                if (eScript != null)
-                    eScript.player = playerT;
-
-
-                // Si c'est un EnemyAdvanced, il contiendra son propre script et sa vie augmentée
+                    var eScript = enemyGO.GetComponent<Enemy>();
+                    if (eScript != null)
+                        eScript.player = playerT;
+                }
             }
         }
     }

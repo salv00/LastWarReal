@@ -1,17 +1,16 @@
-// WaveManager.cs
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [Header("Standard Enemies")]
-    public GameObject enemyPrefab;
+    [Header("Wave Settings")]
     public int enemiesPerWave = 5;
     public float timeBetweenWaves = 5f;
 
-    [Header("Advanced Enemies")]
-    public GameObject advancedEnemyPrefab;    // assigné en Inspector
-    public int advancedEveryXWaves = 5;       // toutes les 5 vagues
-    public float speedIncrementPerWave = 0.2f; // bonus de vitesse pour avancés
+    [Header("Advanced Wave")]
+    [Tooltip("Toutes les X vagues seront avancées")]
+    public int advancedEveryXWaves = 5;
+    [Tooltip("Bonus de vitesse à appliquer aux vagues avancées")]
+    public float speedIncrementPerWave = 0.2f;
 
     private int currentWave = 0;
     private float timer = 0f;
@@ -39,18 +38,13 @@ public class WaveManager : MonoBehaviour
         currentWave++;
         Debug.Log($"Wave {currentWave} started!");
 
-        // Détermine quel prefab utiliser
-        bool isAdvancedWave = (currentWave % advancedEveryXWaves == 0);
-        GameObject prefabToSpawn = isAdvancedWave && advancedEnemyPrefab != null
-            ? advancedEnemyPrefab
-            : enemyPrefab;
+        bool isAdvanced = (currentWave % advancedEveryXWaves == 0);
 
-        // Prépare le spawner
-        formation.enemyPrefab = prefabToSpawn;
-        formation.SpawnFormation();
+        // Utilise la nouvelle signature
+        formation.SpawnFormation(isAdvanced);
 
-        // Si avancée, booste la vitesse de tous les nouveaux ennemis
-        if (isAdvancedWave)
+        // Si vague avancée, booste la vitesse
+        if (isAdvanced)
         {
             var enemies = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (var e in enemies)

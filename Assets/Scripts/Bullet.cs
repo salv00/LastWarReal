@@ -6,19 +6,15 @@ public class Bullet : MonoBehaviour
     public int damage = 1;
     public float lifeTime = 5f;
 
-    void Start()
-    {
-        Destroy(gameObject, lifeTime);
-    }
+    void Start() => Destroy(gameObject, lifeTime);
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        // Tenter de trouver un HealthComponent sur l'objet touché ou ses parents
+        var hc = other.GetComponentInParent<HealthComponent>();
+        if (hc != null)
         {
-            var hc = other.GetComponent<HealthComponent>();
-            if (hc != null)
-                hc.ApplyDamage(damage);
-
+            hc.ApplyDamage(damage);
             Destroy(gameObject);
         }
     }

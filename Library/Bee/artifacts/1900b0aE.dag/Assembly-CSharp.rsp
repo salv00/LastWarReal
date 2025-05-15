@@ -359,6 +359,7 @@
 "Assets/Ilumisoft/Health System/Scripts/Hitbox.cs"
 "Assets/Ilumisoft/Health System/Scripts/UI/Healthbar.cs"
 "Assets/Ilumisoft/Health System/Scripts/UI/PlayerHealthbar.cs"
+"Assets/Kevin Iglesias/Characters/Humanoid Giant/Demo Scene/Scripts/HumanoidGiantDemo.cs"
 "Assets/Scripts/Bullet.cs"
 "Assets/Scripts/CameraFollow.cs"
 "Assets/Scripts/DebugOnce.cs"
